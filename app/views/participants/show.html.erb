@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @participant.gender %>
+</p>
+
+<p>
+  <strong>English name:</strong>
+  <%= @participant.english_name %>
+</p>
+
+<p>
+  <strong>Chinese name:</strong>
+  <%= @participant.chinese_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @participant.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @participant.phone %>
+</p>
+
+<p>
+  <strong>College:</strong>
+  <%= @participant.college %>
+</p>
+
+<p>
+  <strong>Academic year:</strong>
+  <%= @participant.academic_year %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @participant.language %>
+</p>
+
+<p>
+  <strong>Remarks:</strong>
+  <%= @participant.remarks %>
+</p>
+
+<%= link_to 'Edit', edit_participant_path(@participant) %> |
+<%= link_to 'Back', participants_path %>
