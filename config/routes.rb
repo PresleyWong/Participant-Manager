@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :participants
   devise_for :servers
   devise_for :admins
