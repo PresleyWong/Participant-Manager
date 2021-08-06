@@ -6,6 +6,19 @@ class ParticipantsController < ApplicationController
     @participants = Participant.all
   end
 
+  def export
+    @participants = Event.find(params[:event_id]).participants
+    respond_to do |format|
+      format.csv { send_data @participants.to_csv, filename: "participants-#{DateTime.now.strftime("%d-%m-%Y%_I%M%p")}.csv" }
+    end
+  end
+
+  def import
+    event = Event.find(params[:event_id])
+    Participant.import(params[:file], event)    
+    redirect_to event_path(event), notice: "Participant imported!"
+  end
+
   # GET /participants/1 or /participants/1.json
   def show
   end

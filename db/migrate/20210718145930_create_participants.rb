@@ -5,7 +5,7 @@ class CreateParticipants < ActiveRecord::Migration[6.0]
       t.string :english_name
       t.string :chinese_name
       t.string :email
-      t.integer :phone
+      t.integer :phone, :limit => 8
       t.string :college
       t.integer :academic_year
       t.string :language
@@ -13,5 +13,7 @@ class CreateParticipants < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_index :participants, :email, unique: true
   end
 end

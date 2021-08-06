@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_07_24_064151) do
   create_table "appointments", force: :cascade do |t|
     t.bigint "participant_id", null: false
     t.bigint "event_id", null: false
-    t.string "registerer"
+    t.string "server_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_appointments_on_event_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_07_24_064151) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.string "title"
     t.date "date"
     t.time "start_time"
     t.time "end_time"
@@ -51,13 +52,14 @@ ActiveRecord::Schema.define(version: 2021_07_24_064151) do
     t.string "english_name"
     t.string "chinese_name"
     t.string "email"
-    t.integer "phone"
+    t.bigint "phone"
     t.string "college"
     t.integer "academic_year"
     t.string "language"
     t.text "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_participants_on_email", unique: true
   end
 
   create_table "servers", force: :cascade do |t|

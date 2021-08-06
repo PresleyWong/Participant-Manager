@@ -8,6 +8,20 @@ class EventsController < ApplicationController
 
   # GET /events/1 or /events/1.json
   def show
+    if query_params.empty?
+      @participants = Participant.none
+    else
+      @participants = Participant.filtered(query_params)
+    end
+
+    registrants = Array.new  
+    appointments = Array.new  
+    @event.appointments.each do |a|
+      registrants << Participant.find(a.participant_id)
+      appointments << a
+    end
+
+    @regis = registrants.zip(appointments) 
   end
 
   # GET /events/new
@@ -17,6 +31,16 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+  end
+
+  def register_participant
+    Appointment.create(participant_id: params[:participant_id], event_id: params[:event_id], server_name: "testing server")
+    redirect_to event_path(params[:event_id])
+  end
+
+  def remove_participant
+    Appointment.where(participant_id: params[:participant_id], event_id: params[:event_id]).destroy_all
+    redirect_to event_path(params[:event_id])
   end
 
   # POST /events or /events.json
@@ -64,6 +88,11 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:date, :start_time, :end_time)
+      params.require(:event).permit(:title, :date, :start_time, :end_time)
+    end
+
+    def query_params
+      query_params = params[:query]
+      query_params ? query_params.permit(:search_item) : {}
     end
 end

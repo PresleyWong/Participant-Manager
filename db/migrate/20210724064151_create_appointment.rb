@@ -3,7 +3,7 @@ class CreateAppointment < ActiveRecord::Migration[6.0]
     create_table :appointments do |t|
       t.references  :participant, null: false, foreign_key: true
       t.references  :event, null: false, foreign_key: true
-      t.string      :registerer
+      t.string :server_name, null: false
 
       t.timestamps
     end

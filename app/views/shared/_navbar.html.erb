@@ -10,6 +10,24 @@
 
       <ul class="navbar-nav ms-auto">
 
+        <li class="nav-item">
+        <% if server_signed_in? %>
+          <%= link_to 'Sign Out as Server', destroy_server_session_path, class: "nav-link", method: :delete %> |
+        <% elsif !admin_signed_in? %>
+          <%= link_to "Sign In as Server", new_server_session_path, class: "nav-link" %> |
+        <% end %>
+        </li>
+
+        
+        <li class="nav-item">
+        <% if admin_signed_in? %>
+          <%= link_to 'Sign Out as Admin', destroy_admin_session_path, class: "nav-link", method: :delete %> |
+        <% elsif !server_signed_in? %>
+          <%= link_to "Sign In as Admin", new_admin_session_path, class: "nav-link" %> |
+        <% end %>
+        </li>
+
+
         <%if current_server or current_admin %>
         <li class="nav-item">
           <a class="nav-link" href=<%=dashboard_path%>>Dashboard</a>

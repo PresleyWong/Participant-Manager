@@ -17,49 +17,34 @@
 #   end
 # end
 
-User.create(
-    eng_name: Faker::Name.first_name,
-    chn_name: Faker::Name.last_name,
-    gender: ["Brother", "Sister"].sample ,
-    language: "English",
-    locality: "Petaling Jaya",
+Admin.create(
     email: "test1@gmail.com",
-    password: "123456",
-    admin: true,
-    phone_no: Faker::Number.number(digits: 10)
+    password: "123456"
 )
 
-User.create(
-    eng_name: Faker::Name.first_name,
-    chn_name: Faker::Name.last_name,
-    gender: ["Brother", "Sister"].sample ,
-    language: "English",
-    locality: "Petaling Jaya",
-    email: "test2@gmail.com",
-    password: "123456",
-    phone_no: Faker::Number.number(digits: 10)
-)
-
-
-20.times do |n|
-    User.create(
-            eng_name: Faker::Name.first_name,
-            chn_name: Faker::Name.last_name,
-            gender: ["Brother", "Sister"].sample ,
-            language: "English",
-            locality: "Petaling Jaya",
-            email: Faker::Internet.email,
-            password: "123456",
-            phone_no: Faker::Number.number(digits: 10)
-        )
+50.times do |n|
+    Server.create(
+        email: Faker::Internet.email,
+        password: "123456"
+    )
         
+    Participant.create(
+        english_name: Faker::Name.first_name,
+        chinese_name: Faker::Name.last_name,
+        gender: ["Brother", "Sister"].sample ,
+        language: "English",
+        academic_year: Faker::Number.between(from: 1, to: 4),
+        email: Faker::Internet.email,
+        phone: Faker::Number.number(digits: 12),
+        remarks: Faker::Quote.yoda,
+        college: Faker::University.name,
+    )
+
     Event.create(
-        title: Faker::Mountain.name,
+        title: Faker::Hobby.activity,
         date: Faker::Date.forward(days: 23),
         start_time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
-        end_time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
-        meeting_id1: Faker::Number.number(digits: 10),
-        attachment_url1: Faker::LoremFlickr.image
+        end_time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
     )
 end
 
@@ -67,10 +52,9 @@ end
 60.times do |n|
     suppress(Exception) do
         Appointment.create(
-            user_id: Faker::Number.between(from: 1, to: 20), 
+            participant_id: Faker::Number.between(from: 1, to: 20), 
             event_id: Faker::Number.between(from: 1, to: 20),
-            language: "English",
-            join_url: Faker::LoremFlickr.image
+            server_name: Server.order('RANDOM()').first.email
         )
     end     
 end
