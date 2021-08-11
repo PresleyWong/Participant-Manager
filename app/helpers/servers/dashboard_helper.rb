@@ -1,0 +1,2 @@
+module Servers::DashboardHelper
+end
