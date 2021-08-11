@@ -17,13 +17,10 @@
       <div class="row">
         <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" id="sidebarMenu">
           <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <%= link_to dashboard_path, class: "nav-link" do %>
-                <i class="fas fa-home"></i> Dashboard
-                <% end %> 
-              </li>
+            <ul class="nav flex-column">   
               
+              <% if current_admin %>
+
               <li class="nav-item">
                 <%= link_to events_path, class: "nav-link" do %>
                 <i class="fas fa-calendar-alt"></i> Events
@@ -31,10 +28,30 @@
               </li>
 
               <li class="nav-item">
-                <%= link_to users_path, class: "nav-link" do %>
-                <i class="fas fa-users"></i> Users
+                  <%= link_to participants_path, class: "nav-link" do %>
+                  <i class="fas fa-users"></i> Participants
+                  <% end %> 
+              </li>
+
+              <li class="nav-item">
+                <%= link_to admins_servers_path, class: "nav-link" do %>
+                <i class="fas fa-users"></i> Serving Ones
+                <% end %> 
+            </li>
+
+              <% else %>
+
+              <li class="nav-item">
+                <%= link_to events_path, class: "nav-link" do %>
+                <i class="fas fa-calendar-alt"></i> Events
                 <% end %> 
               </li>
+              <li class="nav-item">
+                  <%= link_to participants_path, class: "nav-link" do %>
+                  <i class="fas fa-users"></i> Participants
+                  <% end %> 
+              </li>
+              <% end %>
 
             </ul>
 
@@ -42,22 +59,27 @@
               <ul class="nav flex-column mb-2">
                 
                 <li class="nav-item">
-                  <%= link_to credentials_path, class: "nav-link" do %>
+                  <%= link_to root_path, class: "nav-link" do %>
                   <i class="fas fa-key"></i> Credentials
                   <% end %> 
                 </li>
 
-
                 <li class="nav-item">
-                  <%= link_to user_path(current_user), class: "nav-link" do %>
+                  <%= link_to root_path, class: "nav-link" do %>
                   <i class="fas fa-user-circle"></i> Account
                   <% end %> 
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to destroy_user_session_path,  class: "nav-link", method: :delete do %>
-                  <i class="fas fa-power-off"></i> Logout
-                  <% end %> 
+                  <% if server_signed_in? %>
+                    <%= link_to destroy_server_session_path,  class: "nav-link", method: :delete do %>
+                    <i class="fas fa-power-off"></i> Logout
+                    <% end %> 
+                  <% elsif admin_signed_in? %>
+                    <%= link_to destroy_admin_session_path,  class: "nav-link", method: :delete do %>
+                    <i class="fas fa-power-off"></i> Logout
+                    <% end %> 
+                  <% end %>
                 </li>
 
               </ul>

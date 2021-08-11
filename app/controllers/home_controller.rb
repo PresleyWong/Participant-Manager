@@ -1,11 +1,12 @@
 class HomeController < ApplicationController
-  layout "admin", only: [:dashboard]
-
   def index
-  end
-  
+    if admin_signed_in?
+      redirect_to(admins_authenticated_root_path)
+    elsif server_signed_in?
+      redirect_to(servers_authenticated_root_path)
+    end
 
-  def dashboard
+    @events = Event.order(date: :desc)
   end
 
 end

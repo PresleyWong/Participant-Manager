@@ -1,5 +1,7 @@
 class ParticipantsController < ApplicationController
   before_action :set_participant, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  layout "dashboard"
 
   # GET /participants or /participants.json
   def index

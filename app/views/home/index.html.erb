@@ -1,14 +1,12 @@
 <section class="pt-5 pb-5 text">
-    <div class="row d-flex align-items-center">
-        <% if !current_server %>
+    <div class="row d-flex align-items-center">                
         <div class="col-md-3 align-self-start">
             <div class="card shadow-lg text-left h-100">
-                <h5 class="card-header text-white bg-secondary">Login</h5>
-                <div class="card-body">
-                <%= render 'devise/sessions/form' %>
-                </div>
+                <%= render 'servers/sessions/form' %>  
             </div>
         </div>
-        <% end %>            
+        <div class="col-md-9">   
+            <%= render :partial => 'annouce' %>              
+        </div>              
     </div>
 </section>

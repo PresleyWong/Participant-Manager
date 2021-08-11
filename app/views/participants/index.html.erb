@@ -1,43 +1,61 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Participants</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
+  <h1 class="h2">Participants</h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Gender</th>
-      <th>English name</th>
-      <th>Chinese name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>College</th>
-      <th>Academic year</th>
-      <th>Language</th>
-      <th>Remarks</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @participants.each do |participant| %>
-      <tr>
-        <td><%= participant.gender %></td>
-        <td><%= participant.english_name %></td>
-        <td><%= participant.chinese_name %></td>
-        <td><%= participant.email %></td>
-        <td><%= participant.phone %></td>
-        <td><%= participant.college %></td>
-        <td><%= participant.academic_year %></td>
-        <td><%= participant.language %></td>
-        <td><%= participant.remarks %></td>
-        <td><%= link_to 'Show', participant %></td>
-        <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
-        <td><%= link_to 'Destroy', participant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<section class="pt-5 pb-5">
 
-<br>
+    <div class="row w-100">
+      <div class="col-lg-12 col-md-12 col-12">
 
-<%= link_to 'New Participant', new_participant_path %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Gender</th>
+              <th>English Name</th>
+              <th>Chinese Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>University/College</th>
+              <th>Academic year</th>
+              <th>Language</th>
+              <th>Remarks</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @participants.each_with_index do |participant, index|%>
+            <tr>
+              <td><%= index+1 %></td>
+              <td><%= participant.gender %>  </td>
+              <td><%= participant.english_name %></td>
+              <td><%= participant.chinese_name %></td>
+              <td><%= participant.email %></td>
+              <td><%= participant.phone %></td>
+              <td><%= participant.college %></td>
+              <td><%= participant.academic_year %></td>
+              <td><%= participant.language %></td>
+              <td><%= participant.remarks[0...30] %></td>
+              <td class="actions">
+                
+                <%= link_to edit_participant_path(participant), class: "btn btn-white border-secondary bg-white btn-sm", title: 'Edit' do %>
+                <i class="fas fa-edit"></i>
+                <% end %>  
+
+                <%= link_to participant, method: :delete, class: "btn btn-white border-secondary bg-white btn-sm", data: { confirm: 'Are you sure?' }, title: 'Delete' do %>
+                <i class="fas fa-trash"></i>
+                <% end %>        
+
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      <%= link_to 'New Participant', new_participant_path %>
+    </div>    
+
+</section>
