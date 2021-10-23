@@ -18,6 +18,7 @@ class Admins::DashboardController < ApplicationController
 
   def create_server
     @server = Server.new(email: params[:email], password: params[:password], locality: params[:locality])
+    puts "####################[LOG]: #{@server.inspect}"
 
     respond_to do |format|
       if @server.save
@@ -31,6 +32,7 @@ class Admins::DashboardController < ApplicationController
   end
 
   def update_server
+    puts "####################[LOG]: #{@server.inspect}"
     respond_to do |format|
       if @server.update(server_params)
         format.html { redirect_to admins_servers_path, notice: "Server was successfully updated." }
