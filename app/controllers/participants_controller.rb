@@ -5,7 +5,11 @@ class ParticipantsController < ApplicationController
 
   # GET /participants or /participants.json
   def index
-    @participants = Participant.all
+    if server_signed_in?
+      @participants = Participant.where(:locality => current_server.locality)
+    else
+      @participants = Participant.all
+    end
   end
 
   def export
@@ -37,6 +41,10 @@ class ParticipantsController < ApplicationController
   # POST /participants or /participants.json
   def create
     @participant = Participant.new(participant_params)
+
+    if server_signed_in?
+      @participant.locality = current_server.locality
+    end
 
     respond_to do |format|
       if @participant.save
@@ -79,6 +87,6 @@ class ParticipantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def participant_params
-      params.require(:participant).permit(:gender, :english_name, :chinese_name, :email, :phone, :college, :academic_year, :language, :remarks)
+      params.require(:participant).permit(:gender, :english_name, :chinese_name, :email, :phone, :college, :academic_year, :language, :remarks, :locality)
     end
 end

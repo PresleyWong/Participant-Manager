@@ -17,6 +17,8 @@
 #   end
 # end
 
+states = ["Kuala Lumpur", "Penang", "Selangor", "Johor", "Sarawak", "Sabah", "Melaka", "Perak"] 
+
 Admin.create(
     email: "test1@gmail.com",
     password: "123456"
@@ -25,6 +27,7 @@ Admin.create(
 50.times do |n|
     Server.create(
         email: Faker::Internet.email,
+        locality: states.sample,
         password: "123456"
     )
         
@@ -38,6 +41,7 @@ Admin.create(
         phone: Faker::Number.number(digits: 12),
         remarks: Faker::Quote.yoda,
         college: Faker::University.name,
+        locality: states.sample
     )
 
     Event.create(

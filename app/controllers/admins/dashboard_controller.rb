@@ -17,7 +17,7 @@ class Admins::DashboardController < ApplicationController
   end
 
   def create_server
-    @server = Server.new(email: params[:email], password: params[:password])
+    @server = Server.new(email: params[:email], password: params[:password], locality: params[:locality])
 
     respond_to do |format|
       if @server.save
@@ -58,7 +58,7 @@ class Admins::DashboardController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def server_params
-    params.require(:server).permit(:email, :password)
+    params.require(:server).permit(:email, :password, :locality)
   end
 
 end
