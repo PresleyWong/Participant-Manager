@@ -13,7 +13,11 @@ class EventsController < ApplicationController
     if query_params.empty?
       @participants = Participant.none
     else
-      @participants = Participant.filtered(query_params)
+      if server_signed_in?
+        @participants = Participant.filtered_by_server(query_params, current_server.locality)
+      else
+        @participants = Participant.filtered_by_admin(query_params)
+      end
     end
 
     registrants = Array.new  
@@ -36,7 +40,7 @@ class EventsController < ApplicationController
   end
 
   def register_participant
-    Appointment.create(participant_id: params[:participant_id], event_id: params[:event_id], server_name: "testing server")
+    Appointment.create(participant_id: params[:participant_id], event_id: params[:event_id], server_name: current_server.email)
     redirect_to event_path(params[:event_id])
   end
 

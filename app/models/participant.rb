@@ -2,7 +2,8 @@ class Participant < ApplicationRecord
     has_many :appointments
     has_many :events, through: :appointments
 
-    scope :filtered, ->(query_params) { where("english_name ILIKE ?", "%#{query_params[:search_item]}%") }
+    scope :filtered_by_server, ->(query_params, locality) { where("english_name ILIKE ?", "%#{query_params[:search_item]}%").where('locality IN (?)', locality) }
+    scope :filtered_by_admin, ->(query_params) { where("english_name ILIKE ?", "%#{query_params[:search_item]}%") }
 
     def self.to_csv
         lookup = {

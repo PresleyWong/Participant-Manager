@@ -18,6 +18,11 @@
               <th>English Name</th>
               <th>Chinese Name</th>
               <th>Email</th>
+
+              <% if current_admin %>
+              <th>Locality</th>
+              <% end %>
+
               <th>Phone Number</th>
               <th>University/College</th>
               <th>Academic year</th>
@@ -34,6 +39,11 @@
               <td><%= participant.english_name %></td>
               <td><%= participant.chinese_name %></td>
               <td><%= participant.email %></td>
+
+              <% if current_admin %>
+              <td><%= participant.locality %>  </td>
+              <% end %>
+
               <td><%= participant.phone %></td>
               <td><%= participant.college %></td>
               <td><%= participant.academic_year %></td>
