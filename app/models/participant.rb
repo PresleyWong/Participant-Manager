@@ -60,7 +60,7 @@ class Participant < ApplicationRecord
             Appointment.create(
               participant_id: participant.id, 
               event_id: event.id,
-              server_name: "server@gmail.com"
+              server_name: "[placeholder]"
             )         
 
           end

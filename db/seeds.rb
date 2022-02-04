@@ -24,11 +24,19 @@ Admin.create(
     password: "123456"
 )
 
+Server.create(
+    email: "test2@gmail.com",
+    locality: states.sample,
+    password: "123456",
+    name: "test2"
+)
+
 50.times do |n|
     Server.create(
         email: Faker::Internet.email,
         locality: states.sample,
-        password: "123456"
+        password: "123456",
+        name: "#{Faker::Name.first_name} #{Faker::Name.last_name}"
     )
         
     Participant.create(
@@ -58,7 +66,7 @@ end
         Appointment.create(
             participant_id: Faker::Number.between(from: 1, to: 20), 
             event_id: Faker::Number.between(from: 1, to: 20),
-            server_name: Server.order('RANDOM()').first.email
+            server_name: Server.order('RANDOM()').first.name
         )
     end     
 end
