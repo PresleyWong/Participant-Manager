@@ -14,10 +14,10 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Email</th>
-              <th>Name</th>
-              <th>Locality</th>
-              <th>Create At</th>
+              <th><%= link_to "Name", :sort => "name"%> </th>
+              <th><%= link_to "Email", :sort => "email"%> </th>
+              <th><%= link_to "Locality", :sort => "locality"%> </th>  
+              <th><%= link_to "Create At", :sort => "created_at"%> </th>  
               <th>Action</th>
             </tr>
           </thead>
@@ -25,8 +25,8 @@
             <% @servers.each_with_index do |server, index|%>
             <tr>
               <td><%= index+1 %></td>
-              <td><%= server.email %></td>
               <td><%= server.name %></td>
+              <td><%= server.email %></td>
               <td><%= server.locality %></td>
               <td><%= server.created_at %></td>
               <td class="actions">

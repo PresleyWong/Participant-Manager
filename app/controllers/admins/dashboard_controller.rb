@@ -6,7 +6,7 @@ class Admins::DashboardController < ApplicationController
   end
 
   def servers
-    @servers = Server.all
+    @servers = Server.order(params[:sort])
   end
 
   def new_server

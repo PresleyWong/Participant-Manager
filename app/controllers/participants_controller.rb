@@ -6,9 +6,9 @@ class ParticipantsController < ApplicationController
   # GET /participants or /participants.json
   def index
     if server_signed_in?
-      @participants = Participant.where(:locality => current_server.locality)
+      @participants = Participant.where(:locality => current_server.locality).order(params[:sort])
     else
-      @participants = Participant.all
+      @participants = Participant.order(params[:sort])
     end
   end
 

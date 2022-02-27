@@ -32,7 +32,11 @@
 <% end  %>
 
 
-<% if !@participants.empty? %>
+<% if @participants.empty? %>
+  <% if @search %>
+    Participant not found. Click  <%= link_to 'here', new_participant_path %> to register.
+  <% end %>
+<% else %>
 <table class="table table-success table-striped">
   <thead>
     <tr>
@@ -71,66 +75,25 @@
 <table class="table table-striped mt-1">
 
 
-<% if server_signed_in? %>
-<thead>
-  <tr>
-    <th>Gender</th>
-    <th>English Name</th>
-    <th>Chinese Name</th>
-    <th>Email</th>
-    <th>Phone Number</th>
-    <th>Language</th>
-    <th>Register Date</th>
-    <th>College</th>
-    <th>Academic Year</th>
-    <th>Serving One</th>
-    <th>Remarks</th>
-    <th>Action</th>
-  </tr>
-</thead>
-<tbody>
-  <% @regis.each do |participant, appointment| %>
-    <% if participant.locality == current_server.locality%>
-    <tr>
-      <td><%= participant.gender %>  </td>
-      <td><%= participant.english_name %></td>
-      <td><%= participant.chinese_name %></td>
-      <td><%= participant.email %></td>
-      <td><%= participant.phone %></td>
-      <td><%= participant.language %></td>
-      <td><%= appointment.created_at.strftime("%d-%m-%Y %I:%M %p") %></td>
-      <td><%= participant.college %></td>
-      <td><%= participant.academic_year %></td>
-      <td><%= appointment.server_name %></td>
-      <td><%= participant.remarks %></td>
-      <td> 
-        <%= link_to remove_participant_path(@event.id, participant.id), class: "btn btn-white border-secondary bg-white btn-sm" do %>
-        <i class="fas fa-trash"></i>
-        <% end %>   
 
-        <%= link_to edit_participant_path(participant), class: "btn btn-white border-secondary bg-white btn-sm" do %>
-        <i class="fas fa-edit"></i>
-        <% end %>   
-      </td>
-    </tr>
-    <% end %>
-  <% end %>
-</tbody>
-<% elsif admin_signed_in? %>
 <thead>
   <tr>
-    <th>Gender</th>
-    <th>English Name</th>
-    <th>Chinese Name</th>
-    <th>Email</th>
-    <th>Locality</th>
-    <th>Phone Number</th>
-    <th>Language</th>
+    <th><%= link_to "Gender", :sort => "gender"%> </th>
+    <th><%= link_to "English Name", :sort => "english_name"%> </th>
+    <th><%= link_to "Chinese Name", :sort => "chinese_name"%> </th>  
+    <th><%= link_to "Email", :sort => "email"%> </th> 
+
+    <% if current_admin %>
+    <th><%= link_to "Locality", :sort => "locality"%> </th>  
+    <% end %>
+
+    <th><%= link_to "Phone Number", :sort => "phone"%> </th>  
+    <th><%= link_to "Language", :sort => "language"%> </th>  
     <th>Register Date</th>
-    <th>College</th>
-    <th>Academic Year</th>
+    <th><%= link_to "University/College", :sort => "college"%> </th>  
+    <th><%= link_to "Academic Year", :sort => "academic_year"%> </th>  
     <th>Serving One</th>
-    <th>Remarks</th>
+    <th><%= link_to "Remarks", :sort => "remarks"%> </th>  
     <th>Action</th>
   </tr>
 </thead>
@@ -141,7 +104,9 @@
     <td><%= participant.english_name %></td>
     <td><%= participant.chinese_name %></td>
     <td><%= participant.email %></td>
-    <td><%= participant.locality %></td>
+    <% if current_admin %>
+    <td><%= participant.locality %>  </td>
+    <% end %>
     <td><%= participant.phone %></td>
     <td><%= participant.language %></td>
     <td><%= appointment.created_at.strftime("%d-%m-%Y %I:%M %p") %></td>
@@ -161,7 +126,7 @@
   </tr>
   <% end %>
 </tbody>
-<% end %>
+
 
 
 </table>
