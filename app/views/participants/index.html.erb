@@ -14,20 +14,23 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Gender</th>
-              <th>English Name</th>
-              <th>Chinese Name</th>
-              <th>Email</th>
+              
+              <th><%= link_to "Gender", :sort => "gender"%> </th>
+              <th><%= link_to "English Name", :sort => "english_name"%> </th>
+              <th><%= link_to "Chinese Name", :sort => "chinese_name"%> </th>  
+              <th><%= link_to "Email", :sort => "email"%> </th>  
+
 
               <% if current_admin %>
-              <th>Locality</th>
+              <th><%= link_to "Locality", :sort => "locality"%> </th>  
               <% end %>
 
-              <th>Phone Number</th>
-              <th>University/College</th>
-              <th>Academic year</th>
-              <th>Language</th>
-              <th>Remarks</th>
+              <th><%= link_to "Phone Number", :sort => "phone"%> </th>  
+              <th><%= link_to "University/College", :sort => "college"%> </th>  
+              <th><%= link_to "Academic Year", :sort => "academic_year"%> </th>  
+              <th><%= link_to "Language", :sort => "language"%> </th>  
+              <th><%= link_to "Remarks", :sort => "remarks"%> </th>  
+
               <th>Action</th>
             </tr>
           </thead>

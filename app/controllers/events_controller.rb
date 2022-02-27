@@ -10,6 +10,10 @@ class EventsController < ApplicationController
 
   # GET /events/1 or /events/1.json
   def show
+    if params[:commit]
+      @search = true
+    end
+
     if query_params.empty?
       @participants = Participant.none
     else
@@ -22,10 +26,26 @@ class EventsController < ApplicationController
 
     registrants = Array.new  
     appointments = Array.new  
+
     @event.appointments.each do |a|
       registrants << Participant.find(a.participant_id)
-      appointments << a
     end
+
+    if !registrants.empty?
+      registrants.sort_by! { |k| k[params[:sort]] }    
+      
+      registrants.each do |r|
+        @event.appointments.each do |a|
+          if a.participant_id == r.id
+            appointments << a
+          end
+        end
+      end
+
+    end
+    
+
+ 
 
     @regis = registrants.zip(appointments) 
   end
@@ -40,7 +60,7 @@ class EventsController < ApplicationController
   end
 
   def register_participant
-    Appointment.create(participant_id: params[:participant_id], event_id: params[:event_id], server_name: current_server.email)
+    Appointment.create(participant_id: params[:participant_id], event_id: params[:event_id], server_name: current_server.name)
     redirect_to event_path(params[:event_id])
   end
 
