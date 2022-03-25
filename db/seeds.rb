@@ -54,7 +54,8 @@ Server.create(
 
     Event.create(
         title: Faker::Hobby.activity,
-        date: Faker::Date.forward(days: 23),
+        start_date: Faker::Date.forward(days: 1),
+        end_date: Faker::Date.forward(days: 10),
         start_time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
         end_time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
     )

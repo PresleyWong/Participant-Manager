@@ -6,7 +6,7 @@ class HomeController < ApplicationController
       redirect_to(servers_authenticated_root_path)
     end
 
-    @events = Event.order(date: :desc)
+    @events = Event.order(start_date: :desc)
   end
 
 end

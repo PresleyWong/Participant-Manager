@@ -6,8 +6,13 @@
 </p>
 
 <p>
-  <strong>Date:</strong>
-  <%= @event.date %>
+  <strong>Start date:</strong>
+  <%= @event.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @event.end_date %>
 </p>
 
 <p>
@@ -89,10 +94,10 @@
 
     <th><%= link_to "Phone Number", :sort => "phone"%> </th>  
     <th><%= link_to "Language", :sort => "language"%> </th>  
-    <th>Register Date</th>
+    <th><%= link_to "Register Date", :sort => "created_at"%> </th>  
     <th><%= link_to "University/College", :sort => "college"%> </th>  
     <th><%= link_to "Academic Year", :sort => "academic_year"%> </th>  
-    <th>Serving One</th>
+    <th><%= link_to "Serving One", :sort => "server_name"%> </th>  
     <th><%= link_to "Remarks", :sort => "remarks"%> </th>  
     <th>Action</th>
   </tr>
