@@ -15,7 +15,8 @@
             <tr>
               <th>#</th>
               <th>Title</th>
-              <th>Date</th>
+              <th>Start date</th>
+              <th>End date</th>
               <th>Start time</th>
               <th>End time</th>
               <th>Registrant Count</th>
@@ -27,7 +28,8 @@
             <tr>
               <td><%= index+1 %></td>
               <td><%= link_to event.title, event %></td>
-              <td><%= "#{event.date}" %>  </td>
+              <td><%= "#{event.start_date}" %>  </td>
+              <td><%= "#{event.end_date}" %>  </td>
               <td><%= event.start_time %></td>
               <td><%= event.end_time %></td>
               <td><%= event.appointments.count(:participant_id) %></td>
@@ -49,7 +51,8 @@
       </div>
     </div>
 
+    <% if current_admin %>
     <%= link_to 'New Event', new_event_path %>
-
+    <% end %>
  
 </section>

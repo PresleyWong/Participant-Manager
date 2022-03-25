@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_admin!, only: %i[ new ]
   before_action :set_event, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
   layout "dashboard"
@@ -29,15 +30,24 @@ class EventsController < ApplicationController
 
     @event.appointments.each do |a|
       registrants << Participant.find(a.participant_id)
+      appointments << a
     end
 
     if !registrants.empty?
-      registrants.sort_by! { |k| k[params[:sort]] }    
-      
-      registrants.each do |r|
-        @event.appointments.each do |a|
-          if a.participant_id == r.id
-            appointments << a
+      if params[:sort] == "created_at" or params[:sort] == "server_name"
+        appointments.sort_by! { |k| k[params[:sort]] }           
+        registrants.clear
+        appointments.each do |a|
+          registrants << Participant.find(a.participant_id)
+        end
+      else
+        appointments.clear
+        registrants.sort_by! { |k| k[params[:sort]] }            
+        registrants.each do |r|
+          @event.appointments.each do |a|
+            if a.participant_id == r.id
+              appointments << a
+            end
           end
         end
       end
@@ -114,7 +124,7 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:title, :date, :start_time, :end_time)
+      params.require(:event).permit(:title, :start_date, :end_date, :start_time, :end_time)
     end
 
     def query_params
