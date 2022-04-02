@@ -16,3 +16,34 @@
 
 
  @import "bootstrap/scss/bootstrap";
+
+
+  #main-menu-strip {
+    background-color: #e0e5d7 !important;
+  }
+
+  #main-menu-strip > div > a {
+    color: #43483e !important;
+  }
+
+  #main-menu-strip > div > a:hover {
+    background-color: #e0e5d7 !important;
+  }
+
+  body > div.container > section > div > div.col-md-3.align-self-start > div > h5 {
+    background-color: #386a24 !important;
+  }
+
+  body > div.container > section > div > div.col-md-3.align-self-start > div > div > form > div:nth-child(5) > input {
+    background-color: #b7f39a !important;
+    border-color: #b7f39a !important;
+    color: #042101 !important;
+  }
+
+  body > div.container > section > div > div.col-md-9 > div > h5 {
+    background-color: #55624d !important;
+  }
+
+  .bg-light {
+    background-color: #fdfdf5 !important;
+}
