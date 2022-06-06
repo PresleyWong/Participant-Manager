@@ -1,7 +1,16 @@
 class ParticipantsController < ApplicationController
   before_action :set_participant, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  layout "dashboard"
+  before_action :set_layout
+  # layout "dashboard"
+
+  def set_layout
+    if current_admin
+      self.class.layout "dashboard"
+    else
+      self.class.layout "dashboard_server"
+    end
+  end
 
   # GET /participants or /participants.json
   def index
