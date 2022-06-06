@@ -2,7 +2,17 @@ class EventsController < ApplicationController
   before_action :authenticate_admin!, only: %i[ new ]
   before_action :set_event, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  layout "dashboard"
+  before_action :set_layout
+  # layout "dashboard"
+
+  def set_layout
+    if current_admin
+      self.class.layout "dashboard"
+    else
+      self.class.layout "dashboard_server"
+    end
+  end
+
 
   # GET /events or /events.json
   def index
