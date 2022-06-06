@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+
+<% if current_admin %>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom">
   <h2>Events</h2>
 </div>
@@ -56,3 +58,9 @@
     <% end %>
  
 </section>
+<% else %>
+  
+
+<%= render 'home/annouce' %>
+
+<% end %>

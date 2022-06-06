@@ -1,4 +1,4 @@
-<h5 class="card-header text-white bg-secondary">Server Login</h5>
+<h5 class="card-header text-white bg-secondary">Serving One Login</h5>
   <div class="card-body">
 
   <%= form_for(:server, class: "form-signin", :url => session_path(:server)) do |f| %>
@@ -25,7 +25,7 @@
 
 
     <div class="form-group">
-      <%= f.submit "Submit", class: "btn btn-primary w-100" %>
+      <%= f.submit "Submit", class: "btn btn-primary w-100", id: "custom-button" %>
     </div>
 
   <% end %>
