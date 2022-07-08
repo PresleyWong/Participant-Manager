@@ -20,10 +20,22 @@
 #server-menu-strip {
   background-color: #386a24 !important;
   margin-bottom: 40px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 
   .nav-link {
     color: white;
   }
+
+  a:hover {
+    background-color: #386a24;
+  }
+}
+
+
+.h-100 {
+  max-width: 1000px;
+  margin: auto;
 }
 
 #main-menu-strip {
@@ -38,6 +50,12 @@
   background-color: #e0e5d7 !important;
 }
 
+
+// .dropdown-menu{
+//   min-width: 0px;
+// }
+
+
 body > div.container > section > div > div.col-md-3.align-self-start > div > h5 {
   background-color: #386a24 !important;
 }
@@ -47,6 +65,7 @@ body > div.container > section > div > div.col-md-3.align-self-start > div > h5 
   background-color: #b7f39a !important;
   border-color: #b7f39a !important;
   color: #042101 !important;
+  float: right;
 }
 
 #annouce-strip {
