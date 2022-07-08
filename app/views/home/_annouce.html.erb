@@ -7,7 +7,7 @@
 
                 <div class="row align-items-center">
 
-                    <div class="col-12 col-lg-10">
+                    <div class="col-12 col-sm-10">
                         <div class="text-center text-md-start mb-3 mb-lg-0">
                             <h6 class="fw-bold mb-3"><%= event.title%></h6>
                             <p>Date: <%= event.start_date.strftime('%d-%m-%Y') %> to <%=event.end_date.strftime('%d-%m-%Y') %> </p>
@@ -16,7 +16,7 @@
                     
                     
                     <% if current_server %>
-                        <div class="col-12 col-lg-2">
+                        <div class="col-12 col-sm-2">
                             <%= link_to "Register", event , class: "btn btn-primary", id: "custom-button" %>
                         </div>     
                     <% end %>
